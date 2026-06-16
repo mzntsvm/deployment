@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сборщик контента по ключевым словам</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <h1> Сборщик контента</h1>
+    <p class="subtitle">Вбей ключевое слово — получи список сайтов — скачай что нужно</p>
+
+    <!-- ПОИСК -->
+    <div class="card">
+      <div class="search-row">
+        <input
+          type="text"
+          id="keywordInput"
+          placeholder="например: javascript, python, html..."
+          autocomplete="off"
+        />
+        <button id="searchBtn">Найти</button>
+      </div>
+      <div id="searchError" class="error-block hidden"></div>
+    </div>
+
+    <!-- СПИСОК URL -->
+    <div id="urlsBlock" class="card hidden">
+      <h3>Найденные URL по слову «<span id="currentKeywordSpan"></span>»</h3>
+      <div id="urlsList"></div>
+    </div>
+
+    <!-- ПРОГРЕСС ЗАГРУЗКИ -->
+    <div id="progressBlock" class="card hidden">
+      <h3>📥 Идёт загрузка</h3>
+      <div class="progress-bar-wrapper">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+      <div id="progressPercent">0%</div>
+      <div id="progressSizeInfo">0 KB / 0 KB</div>
+      <div id="progressError" class="error-block hidden"></div>
+    </div>
+
+    <!-- СОХРАНЁННЫЙ КОНТЕНТ -->
+    <div class="card">
+      <h3> Сохранённые материалы</h3>
+      <div id="savedList">
+        <p class="empty-hint">Пока ничего не скачано</p>
+      </div>
+    </div>
+
+    <!-- ПРОСМОТР КОНТЕНТА -->
+    <div id="viewerBlock" class="card hidden">
+      <div class="viewer-header">
+        <h3 id="viewerTitle">Просмотр</h3>
+        <button id="closeViewerBtn" class="btn-close">✕</button>
+      </div>
+      <pre id="viewerContent"></pre>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+﻿/* сброс и базовые стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #f0f2f5;
+  color: #1a1a1a;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+/* карточки */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin-bottom: 12px;
+  font-size: 17px;
+}
+
+/* строка поиска */
+.search-row {
+  display: flex;
+  gap: 8px;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s;
+}
+
+.search-row input:focus {
+  outline: none;
+  border-color: #4a6cf7;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  background: #4a6cf7;
+  color: #fff;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #3b5de7;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+button:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
+/* список урлов */
+.url-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  margin-bottom: 6px;
+  background: #f7f8fa;
+  border-radius: 8px;
+  gap: 10px;
+}
+
+.url-row span {
+  word-break: break-all;
+  font-size: 14px;
+  color: #2d3748;
+  flex: 1;
+}
+
+.url-row button {
+  padding: 6px 14px;
+  font-size: 13px;
+  background: #38a169;
+  white-space: nowrap;
+}
+
+.url-row button:hover {
+  background: #2f855a;
+}
+
+/* прогресс */
+.progress-bar-wrapper {
+  width: 100%;
+  height: 22px;
+  background: #e2e8f0;
+  border-radius: 11px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #48bb78, #38a169);
+  border-radius: 11px;
+  transition: width 0.3s ease;
+}
+
+#progressPercent {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+#progressSizeInfo {
+  text-align: center;
+  color: #718096;
+  font-size: 13px;
+}
+
+/* сохранённые элементы */
+.saved-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f7f8fa;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+  gap: 10px;
+}
+
+.saved-item:hover {
+  background: #edf2f7;
+}
+
+.saved-item .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.saved-item .info .url-text {
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.saved-item .info .meta {
+  font-size: 12px;
+  color: #718096;
+}
+
+.saved-item .delete-btn {
+  background: #fc8181;
+  padding: 6px 10px;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.saved-item .delete-btn:hover {
+  background: #f56565;
+}
+
+/* просмотрщик */
+.viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.btn-close {
+  background: #e2e8f0;
+  color: #4a5568;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0;
+}
+
+.btn-close:hover {
+  background: #cbd5e0;
+}
+
+#viewerContent {
+  background: #1a202c;
+  color: #e2e8f0;
+  padding: 16px;
+  border-radius: 8px;
+  max-height: 500px;
+  overflow: auto;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ошибки */
+.error-block {
+  background: #fff5f5;
+  color: #c53030;
+  border: 1px solid #fed7d7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* утилиты */
+.hidden {
+  display: none;
+}
+
+.empty-hint {
+  text-align: center;
+  color: #a0aec0;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* на мобилках чтобы не разъезжалось */
+@media (max-width: 500px) {
+  .search-row {
+    flex-direction: column;
+  }
+
+  .url-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .saved-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
