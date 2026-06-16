@@ -1,13 +1,1 @@
-{
-  "name": "keyword-fetcher",
-  "version": "1.0.0",
-  "description": "—борщик контента по ключевым словам",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.18.2"
-  }
-}
+{"name":"keyword-fetcher","version":"1.0.0","main":"server.js","scripts":{"start":"node server.js"},"dependencies":{"cors":"^2.8.5","express":"^4.18.2"}}
