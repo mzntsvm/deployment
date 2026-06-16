@@ -1,4 +1,4 @@
-﻿const express = require('express');
+const express = require('express');
 const cors = require('cors');
 const https = require('https');
 const http = require('http');
@@ -10,14 +10,10 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// ----------------------------------------------------------------
 // раздаём статику из папки client
-// ----------------------------------------------------------------
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(process.cwd(), 'client')));
 
-// ----------------------------------------------------------------
-// база ключевых слов (можешь дополнять)
-// ----------------------------------------------------------------
+// база ключевых слов
 const keywordsDB = {
   'javascript': [
     'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction',
@@ -42,9 +38,7 @@ const keywordsDB = {
   ]
 };
 
-// ----------------------------------------------------------------
 // GET /api/urls?keyword=...
-// ----------------------------------------------------------------
 app.get('/api/urls', (req, res) => {
   const keyword = (req.query.keyword || '').toLowerCase().trim();
 
@@ -63,9 +57,7 @@ app.get('/api/urls', (req, res) => {
   res.json({ keyword, urls });
 });
 
-// ----------------------------------------------------------------
 // GET /api/fetch?url=...
-// ----------------------------------------------------------------
 app.get('/api/fetch', (req, res) => {
   const targetUrl = req.query.url;
 
@@ -73,7 +65,6 @@ app.get('/api/fetch', (req, res) => {
     return res.status(400).json({ error: 'Не передан URL' });
   }
 
-  // проверяем что url валидный
   let parsedUrl;
   try {
     parsedUrl = new URL(targetUrl);
@@ -85,7 +76,6 @@ app.get('/api/fetch', (req, res) => {
 
   const request = fetcher.get(targetUrl, { timeout: 15000 }, (targetRes) => {
 
-    // обработка редиректов
     if (targetRes.statusCode >= 300 && targetRes.statusCode < 400 && targetRes.headers.location) {
       return res.redirect(`/api/fetch?url=${encodeURIComponent(targetRes.headers.location)}`);
     }
@@ -101,7 +91,6 @@ app.get('/api/fetch', (req, res) => {
     res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
 
-    // первое сообщение — метаданные
     res.write(JSON.stringify({
       type: 'meta',
       totalSize,
@@ -115,7 +104,6 @@ app.get('/api/fetch', (req, res) => {
       downloaded += chunk.length;
       chunks.push(chunk);
 
-      // отправляем прогресс не на каждый чип, а примерно каждые 100кб
       if (downloaded % (100 * 1024) < chunk.length || downloaded >= totalSize) {
         const progress = totalSize > 0 ? Math.round((downloaded / totalSize) * 100) : 0;
 
@@ -131,7 +119,6 @@ app.get('/api/fetch', (req, res) => {
     targetRes.on('end', () => {
       const fullContent = Buffer.concat(chunks).toString('utf-8');
 
-      // обрезаем слишком большие ответы
       const maxLength = 500 * 1024;
       const contentToSend = fullContent.length > maxLength
         ? fullContent.substring(0, maxLength) + '\n\n... [текст обрезан]'
@@ -178,10 +165,7 @@ app.get('/api/fetch', (req, res) => {
   });
 });
 
-
-// ----------------------------------------------------------------
 // старт
-// ----------------------------------------------------------------
 app.listen(PORT, () => {
   console.log(`Сервер запущен на порту ${PORT}`);
   console.log('Ключевые слова:', Object.keys(keywordsDB).join(', '));
